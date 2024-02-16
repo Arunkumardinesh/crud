@@ -32,17 +32,17 @@ exports.validateJwt = async (req, res, next) => {
     try {
         if (req.headers && req.headers['authorization']) {
             const token = req.headers['authorization'].split(' ')[1];
-            if (!token) return res.status(400).json({ error: 'missing token' });
+            if (!token) return res.status(401).json({ error: 'missing token' });
 
             const secret = "its@secret";
             const decoded = jwt.verify(token, secret);
 
-            if (!decoded) return res.status(400).json({ error: 'Invalid token' })
+            if (!decoded) return res.status(401).json({ error: 'Invalid token' })
 
             return res.status(200).json({ 'message': 'Token verification successful' })
         }
 
-        return res.status(400).json({ error: 'token validation failed' })
+        return res.status(401).json({ error: 'token validation failed' })
     } catch (error) {
         console.log('Error while validating jwt', error);
         res.status(400).json({ 'error': error.message })

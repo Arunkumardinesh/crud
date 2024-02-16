@@ -7,7 +7,7 @@ exports.createUser = async (req, res) => {
         const password = crypto.createHash('sha256').update(userData.password).digest('hex');
         userData.password = password;
         const response = await userService.createUser(userData);
-        res.status(200).json({ message: 'Created the user' });
+        res.status(201).json({ message: 'Created the user' });
     } catch (error) {
         console.log('Error while creating user', error);
         res.status(500).json({ error: error.message });
@@ -23,7 +23,7 @@ exports.deleteUser = async (req, res) => {
 
         const response = await userService.deleteUserWithEmailId({ email: req.body.email });
         if (response && response.acknowledged)
-            res.status(200).json({ 'message': 'Deleted the user' })
+            res.status(204).json({ 'message': 'Deleted the user' })
     } catch (error) {
         console.log('Error while deleting user', error);
         res.status(500).json({ error: error.message });

@@ -1,4 +1,4 @@
-const userRouter = require('./controllers/userRouter');
+const userRouter = require('./authController');
 const middleware = require('./middleware');
 const express = require('express');
 

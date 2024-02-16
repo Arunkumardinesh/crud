@@ -3,7 +3,7 @@ const blogService = require('../../services/blogService');
 exports.getAllBlogs = async (req, res) => {
   try {
     const blogs = await blogService.getAllBlogs();
-    res.json({ data: blogs, status: 'success' });
+    res.staus(200).json({ data: blogs, status: 'success' });
   } catch (error) {
     console.log('Error while fetching all records from db', error);
     res.status(500).json({ error: error.message });
@@ -13,7 +13,7 @@ exports.getAllBlogs = async (req, res) => {
 exports.createBlog = async (req, res) => {
   try {
     const blog = await blogService.createBlog(req.body);
-    res.json({ data: blog, status: 'success' });
+    res.staus(201).json({ data: blog, status: 'created' });
   } catch (error) {
     console.log('Error while creating blog', error);
     res.status(500).json({ error: error.message });
@@ -32,7 +32,7 @@ exports.getBlogById = async (req, res) => {
 exports.updateBlog = async (req, res) => {
   try {
     const blog = await blogService.updateBlog(req.params.id, req.body);
-    res.json({ data: blog, status: "success" });
+    res.status(201).json({ data: blog, status: "updated the blog" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
